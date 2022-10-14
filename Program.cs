@@ -5,7 +5,6 @@ namespace sajat_megoldas
 {
     class Program
     {
-        static List<int> points = new List<int>();
         static int numberOfRacer;
 
         static void Main(string[] args)
@@ -15,8 +14,9 @@ namespace sajat_megoldas
             int[] inputs = Array.ConvertAll(Console.ReadLine().Split(' ', 2), Int32.Parse);
             numberOfRacer = inputs[0];
             int maxPoints = inputs[1];
-
             int[] scores = new int[maxPoints + 1];
+
+            int middleMillis = DateTime.Now.Millisecond;
 
             int place = 1;
             int point = ReadNextNumber();
@@ -24,8 +24,6 @@ namespace sajat_megoldas
             scores[point] = 1;
 
             Console.WriteLine("{0} {1}", 1, 1);
-
-            int middleMillis = DateTime.Now.Millisecond;
 
             for (int i = 1; i < numberOfRacer; i++)
             {
@@ -53,19 +51,18 @@ namespace sajat_megoldas
             Console.Error.WriteLine("full run time: {0}", DateTime.Now.Millisecond - startMillis);
         }
 
-        static int idx = 0;
-
         static int ReadNextNumber()
         {
-            if (points.Count == 0)
+            string s = "";
+            char c = 'a';
+
+            while (c != ' ' && c != '\n')
             {
-                string[] split = Console.ReadLine().Split(' ', numberOfRacer);
-                foreach (var s in split)
-                {
-                    points.Add(Int32.Parse(s));
-                }
+                c = (char)Console.Read();
+                s = s + c;
             }
-            return points[idx++];
+
+            return Int32.Parse(s);
         }
     }
 }
